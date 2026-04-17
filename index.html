@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>WebDev Hub | Yakub Mizi Onim</title>
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <!-- AOS Animation -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', 'Inter', system-ui, sans-serif;
+      background: #0a0c15;
+      color: #eef2ff;
+      line-height: 1.5;
+    }
+
+    /* Animated Gradient Background */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 20% 30%, rgba(0, 212, 255, 0.08), transparent 60%),
+                  radial-gradient(circle at 80% 70%, rgba(124, 58, 237, 0.08), transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem 2.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Modern Glass Header */
+    header {
+      background: rgba(10, 12, 21, 0.8);
+      backdrop-filter: blur(16px);
+      border-radius: 2rem;
+      padding: 0.7rem 2rem;
+      margin-bottom: 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      border: 1px solid rgba(0, 212, 255, 0.2);
+      position: sticky;
+      top: 12px;
+      z-index: 100;
+    }
+
+    .logo h1 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #00d4ff, #7c3aed);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .logo span {
+      font-size: 0.7rem;
+      color: #7c8aa0;
+    }
+
+    .menu {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .menu a {
+      text-decoration: none;
+      color: #b4c0e0;
+      font-weight: 500;
+      transition: 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.9rem;
+    }
+
+    .menu a:hover {
+      color: #00d4ff;
+    }
+
+    .theme-toggle {
+      background: rgba(0, 212, 255, 0.1);
+      border: 1px solid rgba(0, 212, 255, 0.3);
+      border-radius: 2rem;
+      padding: 0.4rem 1.2rem;
+      cursor: pointer;
+      color: #00d4ff;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      font-weight: 500;
+    }
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 2rem 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #00d4ff, #a855f7);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      color: #94a3b8;
+      max-width: 600px;
+      margin: 0.8rem auto 0;
+    }
+
+    /* Section */
+    .section {
+      margin: 2.5rem 0;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-header i {
+      font-size: 1.8rem;
+      color: #00d4ff;
+    }
+
+    .section-header h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+
+    /* Grid */
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    /* Smart Cards */
+    .card {
+      background: rgba(20, 24, 40, 0.6);
+      backdrop-filter: blur(8px);
+      border-radius: 1.5rem;
+      padding: 1.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      transition: all 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(0, 212, 255, 0.3);
+      box-shadow: 0 10px 25px -8px rgba(0, 212, 255, 0.15);
+    }
+
+    .card-icon {
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+    }
+
+    .card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .card p {
+      color: #94a3b8;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      margin-bottom: 0.8rem;
+    }
+
+    .topic-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.8rem;
+    }
+
+    .tag {
+      background: rgba(0, 212, 255, 0.12);
+      padding: 0.2rem 0.7rem;
+      border-radius: 2rem;
+      font-size: 0.7rem;
+      color: #00d4ff;
+    }
+
+    /* Instructor Card */
+    .instructor-card {
+      background: linear-gradient(135deg, rgba(0,212,255,0.08), rgba(124,58,237,0.08));
+      border-radius: 1.5rem;
+      padding: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      border: 1px solid rgba(0,212,255,0.15);
+    }
+
+    .instructor-icon {
+      font-size: 3.5rem;
+      color: #00d4ff;
+    }
+
+    .instructor-info h3 {
+      font-size: 1.4rem;
+    }
+
+    .instructor-info p {
+      color: #94a3b8;
+      font-size: 0.85rem;
+    }
+
+    /* Contact */
+    .contact-icons {
+      display: flex;
+      justify-content: center;
+      gap: 1.2rem;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .contact-icon {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 0.6rem 1.5rem;
+      border-radius: 2.5rem;
+      text-decoration: none;
+      color: #eef2ff;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.9rem;
+      transition: 0.3s;
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .contact-icon:hover {
+      background: rgba(0, 212, 255, 0.15);
+      border-color: #00d4ff;
+      transform: translateY(-2px);
+    }
+
+    .creator {
+      text-align: center;
+      margin-top: 2.5rem;
+      padding: 1.5rem;
+      background: linear-gradient(135deg, #00d4ff10, #7c3aed10);
+      border-radius: 1.5rem;
+    }
+
+    .creator h3 {
+      font-size: 1.2rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      margin-top: 2rem;
+      font-size: 0.8rem;
+      color: #7c8aa0;
+    }
+
+    @media (max-width: 768px) {
+      .container { padding: 0.8rem 1rem; }
+      .hero h1 { font-size: 1.8rem; }
+      .section-header h2 { font-size: 1.2rem; }
+      header { flex-direction: column; gap: 0.8rem; text-align: center; }
+      .instructor-card { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <!-- Header -->
+  <header data-aos="fade-down">
+    <div class="logo">
+      <h1><i class="fa-brands fa-dev"></i> WebDev Hub</h1>
+      <span>learn modern web</span>
+    </div>
+    <div class="menu">
+      <a href="#home"><i class="fas fa-home"></i> Home</a>
+      <a href="#frontend"><i class="fas fa-code"></i> Frontend</a>
+      <a href="#backend"><i class="fas fa-server"></i> Backend</a>
+      <a href="#instructor"><i class="fas fa-user"></i> Instructor</a>
+      <button class="theme-toggle" id="darkModeToggle"><i class="fas fa-moon"></i> Dark</button>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <div id="home" class="hero" data-aos="fade-up">
+    <h1><span class="gradient-text">Web Development</span> Simplified</h1>
+    <p>Learn how to build modern websites — from design to deployment</p>
+  </div>
+
+  <!-- Frontend Section -->
+  <div id="frontend" class="section">
+    <div class="section-header" data-aos="fade-right">
+      <i class="fa-brands fa-html5"></i>
+      <h2>🎨 Frontend (What you see)</h2>
+    </div>
+    <div class="grid-3">
+      <div class="card" data-aos="zoom-in" data-aos-delay="100">
+        <div class="card-icon"><i class="fa-brands fa-html5"></i></div>
+        <h3>HTML5</h3>
+        <p>Structure of websites. Creates headings, paragraphs, images, forms — the skeleton of every webpage.</p>
+        <div class="topic-tags"><span class="tag">Semantic</span><span class="tag">SEO</span><span class="tag">Forms</span></div>
+      </div>
+      <div class="card" data-aos="zoom-in" data-aos-delay="150">
+        <div class="card-icon"><i class="fa-brands fa-css3-alt"></i></div>
+        <h3>CSS3</h3>
+        <p>Makes websites beautiful. Controls colors, layouts, animations, and makes sites responsive on all devices.</p>
+        <div class="topic-tags"><span class="tag">Flexbox</span><span class="tag">Grid</span><span class="tag">Animations</span></div>
+      </div>
+      <div class="card" data-aos="zoom-in" data-aos-delay="200">
+        <div class="card-icon"><i class="fa-brands fa-js"></i></div>
+        <h3>JavaScript</h3>
+        <p>Adds interactivity — buttons, forms, dynamic content, API calls. Brings websites to life.</p>
+        <div class="topic-tags"><span class="tag">ES6</span><span class="tag">DOM</span><span class="tag">API</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- React & Framework -->
+  <div class="section">
+    <div class="section-header" data-aos="fade-right">
+      <i class="fa-brands fa-react"></i>
+      <h2>⚡ Modern Framework</h2>
+    </div>
+    <div class="grid-2">
+      <div class="card" data-aos="flip-left" data-aos-delay="100">
+        <div class="card-icon"><i class="fa-brands fa-react"></i></div>
+        <h3>React.js</h3>
+        <p>Most popular JavaScript library. Build fast, interactive UIs using reusable components. Used by Facebook, Netflix, Uber.</p>
+        <div class="topic-tags"><span class="tag">Components</span><span class="tag">Hooks</span><span class="tag">Virtual DOM</span></div>
+      </div>
+      <div class="card" data-aos="flip-left" data-aos-delay="150">
+        <div class="card-icon"><i class="fa-brands fa-tailwind"></i></div>
+        <h3>Tailwind CSS</h3>
+        <p>Utility-first CSS framework. Write less code, build designs faster. Modern way to style websites.</p>
+        <div class="topic-tags"><span class="tag">Responsive</span><span class="tag">Customizable</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Backend Section -->
+  <div id="backend" class="section">
+    <div class="section-header" data-aos="fade-right">
+      <i class="fa-brands fa-node"></i>
+      <h2>🖥️ Backend (Behind the scenes)</h2>
+    </div>
+    <div class="grid-2">
+      <div class="card" data-aos="fade-up" data-aos-delay="100">
+        <div class="card-icon"><i class="fa-brands fa-node"></i></div>
+        <h3>Node.js + Express</h3>
+        <p>Run JavaScript on the server. Create APIs, handle login, store data, manage users. The brain of web applications.</p>
+        <div class="topic-tags"><span class="tag">REST API</span><span class="tag">JWT Auth</span><span class="tag">Middleware</span></div>
+      </div>
+      <div class="card" data-aos="fade-up" data-aos-delay="150">
+        <div class="card-icon"><i class="fas fa-database"></i></div>
+        <h3>MongoDB</h3>
+        <p>Store your app data — user profiles, posts, products. NoSQL database that works perfectly with JavaScript.</p>
+        <div class="topic-tags"><span class="tag">Cloud</span><span class="tag">Mongoose</span><span class="tag">Scalable</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tools -->
+  <div class="section">
+    <div class="section-header" data-aos="fade-right">
+      <i class="fas fa-toolbox"></i>
+      <h2>🛠️ Developer Tools</h2>
+    </div>
+    <div class="grid-3">
+      <div class="card" data-aos="fade-up" data-aos-delay="100">
+        <i class="fab fa-git-alt" style="font-size: 1.8rem;"></i>
+        <h3>Git & GitHub</h3>
+        <p>Track code changes, collaborate with teams, contribute to open source.</p>
+      </div>
+      <div class="card" data-aos="fade-up" data-aos-delay="150">
+        <i class="fas fa-cloud-arrow-up" style="font-size: 1.8rem;"></i>
+        <h3>Vercel / Netlify</h3>
+        <p>Deploy websites for free. Get a live link in seconds.</p>
+      </div>
+      <div class="card" data-aos="fade-up" data-aos-delay="200">
+        <i class="fas fa-terminal" style="font-size: 1.8rem;"></i>
+        <h3>VS Code</h3>
+        <p>Best code editor with powerful extensions.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Instructor -->
+  <div id="instructor" class="section">
+    <div class="section-header" data-aos="fade-right">
+      <i class="fas fa-chalkboard-user"></i>
+      <h2>👨‍💻 Instructor</h2>
+    </div>
+    <div class="instructor-card" data-aos="fade-up">
+      <div class="instructor-icon"><i class="fas fa-user-astronaut"></i></div>
+      <div class="instructor-info">
+        <h3>Yakub Mizi Onim</h3>
+        <p>Web Developer | Creative AI Institute</p>
+        <p style="font-size: 0.8rem;">🎓 Alim Running | Skills: HTML, CSS, JS, React, Node.js, MongoDB</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact -->
+  <div class="section">
+    <div class="section-header" data-aos="fade-right">
+      <i class="fas fa-paper-plane"></i>
+      <h2>📬 Connect</h2>
+    </div>
+    <div class="card" data-aos="fade-up">
+      <div class="contact-icons">
+        <a href="https://www.facebook.com/share/1CvjZtcC7b/" target="_blank" class="contact-icon"><i class="fab fa-facebook-f"></i> Facebook</a>
+        <a href="https://wa.me/8801868656094" target="_blank" class="contact-icon"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+        <a href="mailto:yakubmizi210@gmail.com" class="contact-icon"><i class="fas fa-envelope"></i> Gmail</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Creator -->
+  <div class="creator" data-aos="zoom-in">
+    <h3><i class="fas fa-crown"></i> Created by</h3>
+    <p style="font-size: 1.3rem; font-weight: 700; margin: 0.3rem 0;">Yakub mizi onim</p>
+    <p style="font-size: 0.8rem;">Web Development Enthusiast</p>
+  </div>
+
+  <footer>
+    <p>© 2026 WebDev Hub — Modern Web Development</p>
+    <p>Made by Yakub mizi onim</p>
+  </footer>
+</div>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init({ duration: 600, once: true, offset: 40 });
+  
+  const toggle = document.getElementById('darkModeToggle');
+  let isDark = true;
+  toggle.addEventListener('click', () => {
+    if (isDark) {
+      document.body.style.background = '#f2f4f8';
+      document.body.style.color = '#1a1c2b';
+      document.querySelectorAll('.card, .instructor-card, .creator, header').forEach(el => {
+        el.style.background = 'rgba(0,0,0,0.03)';
+      });
+      toggle.innerHTML = '<i class="fas fa-moon"></i> Dark';
+      isDark = false;
+    } else {
+      document.body.style.background = '#0a0c15';
+      document.body.style.color = '#eef2ff';
+      document.querySelectorAll('.card, .instructor-card, .creator, header').forEach(el => {
+        el.style.background = 'rgba(20, 24, 40, 0.6)';
+      });
+      toggle.innerHTML = '<i class="fas fa-sun"></i> Light';
+      isDark = true;
+    }
+  });
+</script>
+</body>
+</html>
